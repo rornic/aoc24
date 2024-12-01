@@ -1,4 +1,4 @@
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
 
 use aoc24::{Problem, run_problem};
 use regex::Regex;
@@ -30,8 +30,6 @@ impl Problem for Day1 {
 
     fn part2(&self, input: &str) -> String {
         let [left, right] = parse_input(input);
-
-        let left = left.into_iter().collect::<HashSet<u32>>();
 
         let mut counts = HashMap::<u32, u32>::new();
         for l in left.into_iter() {
