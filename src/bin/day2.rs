@@ -13,15 +13,6 @@ fn parse_input(input: &str) -> Vec<Vec<u32>> {
 }
 
 fn is_report_safe(report: &[u32]) -> bool {
-    let mut last_level = report[0];
-    for level in report.iter().skip(1) {
-        let diff = level.abs_diff(last_level);
-        if !(1..=3).contains(&diff) {
-            return false;
-        }
-        last_level = *level;
-    }
-
     let differences: Vec<i32> = report.iter().zip(report.iter().skip(1)).map(|(a, b)| *b as i32 - *a as i32).collect();
     differences.iter().all(|diff| diff.abs() >= 1 && diff.abs() <= 3)
       && (differences.iter().all(|diff| diff.is_negative()) || differences.iter().all(|diff| diff.is_positive()))
