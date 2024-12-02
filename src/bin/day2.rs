@@ -23,7 +23,7 @@ fn is_report_safe(report: &[u32]) -> bool {
     }
 
     let differences: Vec<i32> = report.iter().zip(report.iter().skip(1)).map(|(a, b)| *b as i32 - *a as i32).collect();
-    differences.iter().all(|diff| diff.abs() >= 1 && diff.abs() <= 3) 
+    differences.iter().all(|diff| diff.abs() >= 1 && diff.abs() <= 3)
       && (differences.iter().all(|diff| diff.is_negative()) || differences.iter().all(|diff| diff.is_positive()))
 }
 
