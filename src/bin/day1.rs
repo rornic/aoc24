@@ -1,5 +1,3 @@
-use std::collections::HashMap;
-
 use aoc24::{Problem, run_problem};
 use regex::Regex;
 
@@ -31,13 +29,7 @@ impl Problem for Day1 {
     fn part2(&self, input: &str) -> String {
         let [left, right] = parse_input(input);
 
-        let mut counts = HashMap::<u32, u32>::new();
-        for l in left.into_iter() {
-            let count = right.iter().filter(|r| **r == l).count() as u32;
-            counts.insert(l, count);
-        }
-
-        let similarity_score: u32 = counts.into_iter().map(|(num, count)| num * count).sum();
+        let similarity_score: u32 = left.iter().map(|num| *num * right.iter().filter(|r| **r == *num).count() as u32).sum();
         format!("{}", similarity_score)
     }
 }
