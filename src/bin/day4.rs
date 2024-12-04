@@ -1,17 +1,8 @@
 use std::collections::HashSet;
 
-use aoc24::{run_problem, Problem};
+use aoc24::{parse_char_grid, run_problem, Problem};
 
 struct Day4 {}
-
-fn parse_input(input: &str) -> Vec<Vec<char>> {
-    let mut rows = vec![];
-    for line in input.lines() {
-        let row = line.chars().collect();
-        rows.push(row);
-    }
-    rows
-}
 
 fn char_at_position((x, y): (i32, i32), grid: &[Vec<char>]) -> char {
     let (x, y) = (x as usize, y as usize);
@@ -85,7 +76,7 @@ fn count_pattern(grid: Vec<Vec<char>>, patterns: Vec<Vec<Vec<char>>>) -> usize {
 
 impl Problem for Day4 {
     fn part1(&self, input: &str) -> String {
-        let grid = parse_input(input);
+        let grid = parse_char_grid(input);
         let count = count_word(
             grid,
             "XMAS",
@@ -104,7 +95,7 @@ impl Problem for Day4 {
     }
 
     fn part2(&self, input: &str) -> String {
-        let grid = parse_input(input);
+        let grid = parse_char_grid(input);
         let count = count_pattern(
             grid,
             vec![
@@ -136,4 +127,35 @@ impl Problem for Day4 {
 
 fn main() {
     run_problem(Day4 {}, "day4");
+}
+
+#[cfg(test)]
+mod tests {
+    use aoc24::Problem;
+
+    use crate::Day4;
+
+    const TEST_INPUT: &str = r#"MMMSXXMASM
+MSAMXMSMSA
+AMXSXMAAMM
+MSAMASMSMX
+XMASAMXAMM
+XXAMMXXAMA
+SMSMSASXSS
+SAXAMASAAA
+MAMMMXMMMM
+MXMXAXMASX"#;
+
+    #[test]
+    fn test_day_4_part_1() {
+        let day_4 = Day4 {};
+        println!("{}", TEST_INPUT);
+        assert_eq!("XMAS count is 18", day_4.part1(TEST_INPUT));
+    }
+
+    #[test]
+    fn test_day_4_part_2() {
+        let day_4 = Day4 {};
+        assert_eq!("X-MAS count is 9", day_4.part2(TEST_INPUT));
+    }
 }

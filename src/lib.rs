@@ -8,14 +8,31 @@ pub trait Problem {
 pub fn run_problem(problem: impl Problem, input_filename: &str) {
     let input = read_input(input_filename).expect("failed to read input");
 
-    println!("solving {}...", input_filename);
-    println!("running part 1...");
     println!("{}", problem.part1(&input));
-
-    println!("running part 2...");
     println!("{}", problem.part2(&input));
 }
 
 pub fn read_input(name: &str) -> Result<String, io::Error> {
     std::fs::read_to_string(format!("input/{}", name))
+}
+
+pub fn parse_char_grid(grid: &str) -> Vec<Vec<char>> {
+    let mut rows = vec![];
+    for line in grid.lines() {
+        let row = line.chars().collect();
+        rows.push(row);
+    }
+    rows
+}
+
+pub fn parse_number_grid(grid: &str) -> Vec<Vec<i32>> {
+    let mut rows = vec![];
+    for line in grid.lines() {
+        let row = line
+            .split(" ")
+            .map(|num| num.parse::<i32>().unwrap())
+            .collect();
+        rows.push(row);
+    }
+    rows
 }
