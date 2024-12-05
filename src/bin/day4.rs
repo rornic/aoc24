@@ -147,14 +147,13 @@ MAMMMXMMMM
 MXMXAXMASX"#;
 
     #[test]
-    fn test_day_4_part_1() {
+    fn test_part_1() {
         let day_4 = Day4 {};
-        println!("{}", TEST_INPUT);
         assert_eq!("XMAS count is 18", day_4.part1(TEST_INPUT));
     }
 
     #[test]
-    fn test_day_4_part_2() {
+    fn test_part_2() {
         let day_4 = Day4 {};
         assert_eq!("X-MAS count is 9", day_4.part2(TEST_INPUT));
     }
